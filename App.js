@@ -9,7 +9,6 @@ export default function App() {
       <Button
   title="Learn More"
   backgroundColor="#848484"
-  onPress={() => alert("eee")}
   accessibilityLabel="Learn more about this purple button"
 />
     </View>
