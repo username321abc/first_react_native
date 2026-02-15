@@ -1,63 +1,52 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Home, Dumbbell, User } from 'lucide-react-native';
-
-
-
-import { ThemeProvider, useTheme } from './context/ThemeContext';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
-import TrainingScreen from './screens/TrainingScreen';
+import TrainingsTopTabs from './navigation/TrainingsTopTabs.js';
 import ProfileScreen from './screens/ProfileScreen';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { Home, User, Dumbbell } from 'lucide-react-native';
 import TrainingStack from './navigation/TrainingStack';
 const Tab = createBottomTabNavigator();
-
-function Tabs() {
-  const { theme } = useTheme();
-
-  const colors = {
-    light: {
-      background: '#F5F7FA',
-      active: '#4F46E5',
-      inactive: '#A1A1AA',
-    },
-    dark: {
-      background: '#1E1E1E',
-      active: '#FFD700',
-      inactive: '#6B7280',
-    },
-  };
-
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarActiveTintColor: colors[theme].active,
-        tabBarInactiveTintColor: colors[theme].inactive,
-        tabBarStyle: { height: 90, paddingBottom: 5, paddingTop: 5, backgroundColor: colors[theme].background },
-        tabBarIcon: ({ color, size }) => {
-          size = 24;
-          if (route.name === 'Home') return <Home color={color} size={size} />;
-          if (route.name === 'Trainings') return <Dumbbell color={color} size={size} />;
-          if (route.name === 'Profile') return <User color={color} size={size} />;
-        },
-      })}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Trainings" component={TrainingStack} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-
-    </Tab.Navigator>
-  );
-}
 
 export default function App() {
   return (
     <ThemeProvider>
       <NavigationContainer>
-        <Tabs />
+        <MainTabs />
       </NavigationContainer>
     </ThemeProvider>
+  );
+}
+
+function MainTabs() {
+  const { colors } = useTheme();
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { backgroundColor: colors.background, height: 90, paddingBottom: 25 },
+        tabBarActiveTintColor: colors.accent,
+        tabBarInactiveTintColor: colors.textSecondary,
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ tabBarIcon: ({ color }) => <Home color={color} size={20} /> }}
+      />
+      <Tab.Screen
+        name="Trainings"
+        component={TrainingStack} // ← teraz stack, nie TopTabs bezpośrednio
+        options={{ tabBarIcon: ({ color }) => <Dumbbell color={color} size={20} /> }}
+      />
+
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ tabBarIcon: ({ color }) => <User color={color} size={20} /> }}
+      />
+    </Tab.Navigator>
   );
 }

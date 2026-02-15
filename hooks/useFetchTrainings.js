@@ -4,12 +4,14 @@ export const useFetchTrainings = () => {
   const [trainings, setTrainings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_URL = 'http://192.168.100.17:3000';
+
 
   const fetchTrainings = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://192.168.100.17:3000/trainings');
+      const response = await fetch(`${API_URL}/trainings`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch trainings');
