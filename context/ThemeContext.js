@@ -9,6 +9,7 @@ const themes = {
         textPrimary: '#111827',
         textSecondary: '#6B7280',
         accent: '#4F46E5',
+        achievement: '#60db7a',
     },
     dark: {
         background: '#1E1E1E',
@@ -16,6 +17,7 @@ const themes = {
         textPrimary: '#FFFFFF',
         textSecondary: '#A1A1AA',
         accent: '#FFD700',
+        achievement: '#60db7a',
     },
 };
 

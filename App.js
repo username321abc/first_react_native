@@ -38,7 +38,7 @@ function MainTabs() {
       />
       <Tab.Screen
         name="Trainings"
-        component={TrainingStack} // ← teraz stack, nie TopTabs bezpośrednio
+        component={TrainingStack}
         options={{ tabBarIcon: ({ color }) => <Dumbbell color={color} size={20} /> }}
       />
 

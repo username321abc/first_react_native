@@ -4,15 +4,24 @@ import { useTheme } from '../context/ThemeContext.js';
 import { useNavigation } from '@react-navigation/native';
 import { useFetchTrainings } from '../hooks/useFetchTrainings.js';
 import { TrainingCard } from '../components/TrainingCard.js'; // The component we discussed
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
+
 
 export default function TrainingScreen() {
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [])
+  );
+
   const { theme, colors, toggleTheme } = useTheme();
   const navigation = useNavigation();
 
   // Everything logic-related is now one line!
   const { trainings, loading, error, refresh } = useFetchTrainings();
-
-  if (loading && trainings.length === 0) {
+  const trainingsTODO = trainings.filter(t => t.completed == 0);
+  if (loading && trainingsTODO.length === 0) {
     return (
       <View style={[styles.center, { backgroundColor: colors.background }]}>
         <ActivityIndicator size="large" color={colors.accent} />
@@ -30,9 +39,9 @@ export default function TrainingScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[styles.title, { color: colors.textPrimary, fontSize:35, marginBottom: 20 }]}>Twoje treningi</Text>
+      <Text style={[styles.title, { color: colors.textPrimary, fontSize: 35, marginBottom: 20 }]}>Twoje treningi</Text>
       <FlatList
-        data={trainings}
+        data={trainingsTODO}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <TrainingCard

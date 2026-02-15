@@ -7,7 +7,7 @@ export const TrainingCard = ({ training, onStart }) => {
     const { theme, colors, toggleTheme } = useTheme();
 
     return (
-        <View style={[styles.card, { backgroundColor: colors.card }]}>
+        <View style={[styles.card, { backgroundColor: colors.card, opacity: training.completed==1 ? 0.6 : 1 }]}>
             <View style={styles.header}>
                 <Text style={[styles.title, { color: colors.textPrimary }]}>
                     {training.name}
@@ -19,10 +19,10 @@ export const TrainingCard = ({ training, onStart }) => {
 
             <Pressable
                 onPress={() => onStart(training)}
-                style={[styles.button, { backgroundColor: colors.accent }]}
+                style={[styles.button, { backgroundColor: training.completed ? '#999' : colors.accent }]}
             >
-                <Text style={styles.buttonText}>Start</Text>
-                <Play color="#fff" size={18} />
+                <Text style={styles.buttonText}>{training.completed ? 'Sprawdź co robiłeś' : 'Rozpocznij'}</Text>
+                {training.completed==0?<Play color="#fff" size={18} />:null}
             </Pressable>
         </View>
     );

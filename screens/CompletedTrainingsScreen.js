@@ -4,13 +4,22 @@ import { useFetchTrainings } from '../hooks/useFetchTrainings';
 import { TrainingCard } from '../components/TrainingCard';
 import { useTheme } from '../context/ThemeContext';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
+
 
 export default function CompletedTrainingsScreen() {
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+    }, [])
+  );
+
   const { trainings, loading, error, refresh } = useFetchTrainings();
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const completedTrainings = trainings.filter(t => t.completed);
+  const completedTrainings = trainings.filter(t => t.completed == 1);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -23,7 +32,7 @@ export default function CompletedTrainingsScreen() {
           data={completedTrainings}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <TrainingCard
+            <TrainingCard style={{ opacity: 0.6 }} // Visual hint that it's completed
               training={item}
               onStart={(t) => navigation.navigate('Exercises', { training: t })}
             />

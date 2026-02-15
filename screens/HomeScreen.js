@@ -11,12 +11,12 @@ export default function HomeScreen() {
             <Text style={[styles.title, { color: colors.textPrimary }]}>Witaj ponownie! </Text>
             <Text style={{ color: colors.textSecondary, fontSize: 16, marginVertical: 5 }}>Gotowy na swoje treningi?</Text>
             <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                <View style={[styles.infoCard, { backgroundColor: colors.info }]}>
+                <View style={[styles.infoCard, { backgroundColor: colors.achievement }]}>
                     <Flame color={colors.accent} size={24} />
                     <View style={{ flexDirection: 'column', marginLeft: 10 }}><Text style={{ color: colors.textSecondary, fontSize: 14 }}>W tym tygodniu:</Text>
                         <Text style={{ color: colors.textPrimary, fontSize: 18, fontWeight: 'bold' }}>3 treningi</Text></View>
                 </View>
-                <View style={[styles.infoCard, { backgroundColor: colors.info, marginLeft: 25 }]}>
+                <View style={[styles.infoCard, { backgroundColor: colors.achievement, marginLeft: 25 }]}>
                     <Medal color={colors.accent} size={24} />
                     <View style={{ flexDirection: 'column', marginLeft: 10 }}><Text style={{ color: colors.textSecondary, fontSize: 14 }}>Ostatni trening:</Text>
                         <Text style={{ color: colors.textPrimary, fontSize: 18, fontWeight: 'bold' }}>14.02.2026</Text></View>
