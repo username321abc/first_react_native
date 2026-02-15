@@ -3,12 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Dumbbell, User } from 'lucide-react-native';
 
+
+
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 import HomeScreen from './screens/HomeScreen';
 import TrainingScreen from './screens/TrainingScreen';
 import ProfileScreen from './screens/ProfileScreen';
-
+import TrainingStack from './navigation/TrainingStack';
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
@@ -43,8 +45,9 @@ function Tabs() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Trainings" component={TrainingScreen} />
+      <Tab.Screen name="Trainings" component={TrainingStack} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
+
     </Tab.Navigator>
   );
 }
